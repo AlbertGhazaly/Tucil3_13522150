@@ -29,11 +29,11 @@ public class MainProgram {
                 do {
                     listVocabs.clear();
                     System.out.print("Masukkan Start Word: ");
-                    startWord = scanner.nextLine();
+                    startWord = scanner.nextLine().toUpperCase();
                     System.out.print("Masukkan End Word: ");
-                    EndWord = scanner.nextLine();
+                    EndWord = scanner.nextLine().toUpperCase();
                     StringBuffer txtPath = new StringBuffer();; // Specify the path to your .txt file
-                    txtPath.append("data/");
+                    txtPath.append("../data/");
                     txtPath.append(String.valueOf(startWord.length()));
                     txtPath.append(".txt");
                     try (BufferedReader br = new BufferedReader(new FileReader(txtPath.toString()))) {
@@ -47,10 +47,13 @@ public class MainProgram {
 
                     if (startWord.length()!=EndWord.length()){
                         System.out.println("Panjang kata masukan tidak valid !");
+                        System.out.println();
                     }else if (!listVocabs.contains(startWord)){
                         System.out.println("Kata awal tidak valid !");
+                        System.out.println();
                     }else if (!listVocabs.contains(EndWord)){
                         System.out.println("Kata akhir tidak valid !");
+                        System.out.println();
                     }else{
                         wordValid = true;
                     }
@@ -60,6 +63,7 @@ public class MainProgram {
                 switch (n) {
                     case 1:
                         // UCS
+                        UCS.findUcsSolution(startWord, EndWord);
                         break;
 
                     case 2:
