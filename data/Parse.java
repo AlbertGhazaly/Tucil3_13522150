@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Parse {
-    // public static void main(String[] args) {
-    //     parseWord("data/words.txt");
-    // }
+    public static void main(String[] args) {
+        parseWord("data/words.txt");
+    }
 
     public static void parseWord(String path){
         // Specify the path to your .txt file
@@ -42,6 +44,13 @@ public class Parse {
         for (Map.Entry<Integer, ArrayList<String>> entry : wordMap.entrySet()) {
             int length = entry.getKey();
             ArrayList<String> words = entry.getValue();
+            Collections.sort(words, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareTo(s2);
+                }
+            });
+    
             StringBuffer pathout = new StringBuffer();
             pathout.append("data/");
             pathout.append(String.valueOf(length));
