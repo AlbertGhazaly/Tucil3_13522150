@@ -32,7 +32,7 @@ public class MainProgram {
                     startWord = scanner.nextLine().toUpperCase();
                     System.out.print("Masukkan End Word: ");
                     EndWord = scanner.nextLine().toUpperCase();
-                    StringBuffer txtPath = new StringBuffer();; // Specify the path to your .txt file
+                    StringBuffer txtPath = new StringBuffer(); // Specify the path to your .txt file
                     txtPath.append("../data/");
                     txtPath.append(String.valueOf(startWord.length()));
                     txtPath.append(".txt");
@@ -68,10 +68,12 @@ public class MainProgram {
 
                     case 2:
                         // Greed
+                        Greed.findGreedSolution(startWord, EndWord);
                         break;
 
                     case 3: 
                         // A*
+                        AStar.findAStarSolution(startWord, EndWord);
                         break;
 
                 }

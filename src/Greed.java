@@ -3,20 +3,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class UCS {
+public class Greed {
     public static int visited_node = 0;
-    public static void findUcsSolution( String wordAwal, String wordAkhir){
-        UCS.visited_node = 0;
-        long startTime = System.nanoTime();
+
+    public static void findGreedSolution(String wordAwal, String wordAkhir){
+        Greed.visited_node = 0;
+          long startTime = System.nanoTime();
         Tree root = new Tree(null,wordAwal,0,0,0);
         int i = 0;
         for (;i<MainProgram.listVocabs.size() && MainProgram.listVocabs.get(i).compareTo(wordAwal)!=0;i++){
         }
         MainProgram.listVocabs.remove(i);
         Tree result = new Tree();
-        // PriorityQueue<Tree> pq = new PriorityQueue<>(Comparator.comparingInt(Tree::getFn).reversed());
         // List<Tree> temp= new ArrayList<Tree>();
-
         PriorityQueue<Tree> pq = new PriorityQueue<>(new Comparator<Tree>() {
             @Override
             public int compare(Tree t1, Tree t2) {
@@ -33,14 +32,18 @@ public class UCS {
         });
         pq.offer(root);
         boolean found = false;
+        if (wordAwal.compareTo(wordAkhir)==0){
+            found = true;
+            result = root;
+        }
         while (!found && !pq.isEmpty()){
             Tree node = pq.poll();
             if (node.getWord().compareTo(wordAkhir)==0){
                 found = true;
                 result = node;
             }
-            UCS.visited_node += 1;
-            node.addChildren(wordAkhir, "UCS");
+            Greed.visited_node += 1;
+            node.addChildren(wordAkhir, "Greed");
             for (int n=0;n<node.getChildren().size() && !found;n++){
                 pq.offer(node.getChildren().get(n));
             }
@@ -65,10 +68,9 @@ public class UCS {
             }
             System.out.println("Time execution: " + elapsedTimeInMillis + " ms");
             System.out.print("Visited Node: ");
-            System.out.println(UCS.visited_node);
+            System.out.println(Greed.visited_node);
         }else{
             System.out.println("Gak Nemu !");
         }
-        // return temp;
     }
 }

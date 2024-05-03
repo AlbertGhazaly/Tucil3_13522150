@@ -5,6 +5,7 @@ public class Tree{
     private String word;
     private int fn;
     private int depth;
+    private int idxInParent;
     private List<Tree> children;
 
     public Tree(){
@@ -12,13 +13,15 @@ public class Tree{
         this.word ="";
         this.fn = 0;
         this.depth = 0;
+        this.idxInParent = 0;
         this.children = new ArrayList<Tree>();
     }
-    public Tree(Tree parent,String word,int depth,int fn){
+    public Tree(Tree parent,String word,int depth,int idxInParent,int fn){
         this.parent = parent;
         this.word =word;
         this.fn = fn;
         this.depth = depth;
+        this.idxInParent = idxInParent;
         this.children = new ArrayList<Tree>();
     }
     public String getWord(){
@@ -33,9 +36,12 @@ public class Tree{
     public int getDepth(){
         return this.depth;
     }
+    public int getIdxInParent(){
+        return this.idxInParent;
+    }
     
     public void addChild(Tree newNode){
-        this.children.add(newNode);
+        this.children.add(this.children.size(),newNode);
     }
     public Tree getParent(){
         return this.parent;
@@ -58,18 +64,19 @@ public class Tree{
         }
         return difference==1;
     }
+
     public void addChildren(String target, String method){
         if (!MainProgram.listVocabs.isEmpty()){
             int n = MainProgram.listVocabs.size();
             int j = 0;
             for (int i=0;i<n;i++){
                 if (isChild(MainProgram.listVocabs.get(j))){
-                    if (method=="UCS"){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,this.fn-1));
-                    }else if (method=="Greed"){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth + 1,sameLetter(MainProgram.listVocabs.get(j), target)));
-                    }else if(method=="A*"){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth + 1,sameLetter(MainProgram.listVocabs.get(j), target)-(this.depth+1)));
+                    if (method.compareTo("UCS")==0){
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,this.children.size(),this.fn-1));
+                    }else if (method.compareTo("Greed")==0){
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth + 1,this.children.size(),sameLetter(MainProgram.listVocabs.get(j), target)));
+                    }else if(method.compareTo("A*")==0){
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth + 1,this.children.size(),sameLetter(MainProgram.listVocabs.get(j), target)-(this.depth+1)));
                     }
                     MainProgram.listVocabs.remove(j);
                     j -=1;
