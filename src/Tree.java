@@ -68,11 +68,11 @@ public class Tree{
             for (int i=0;i<n;i++){
                 if (isChild(MainProgram.listVocabs.get(j))){
                     if (method.compareTo("UCS")==0){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,this.fn-1));
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,this.fn+1));
                     }else if (method.compareTo("Greed")==0){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,sameLetter(MainProgram.listVocabs.get(j),target)));
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,difLetter(MainProgram.listVocabs.get(j),target)));
                     }else if(method.compareTo("A*")==0){
-                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,sameLetter(MainProgram.listVocabs.get(j), target)-(this.depth+1)));
+                        this.addChild(new Tree(this,MainProgram.listVocabs.get(j),this.depth+1,difLetter(MainProgram.listVocabs.get(j), target)+(this.depth+1)));
                     }
                     MainProgram.listVocabs.remove(j);
                     j -=1;
@@ -84,7 +84,7 @@ public class Tree{
     }
     public static void addQueueTree(List <Tree> arr,Tree node){
         int i = 0;
-        while (i<arr.size() && node.fn <= arr.get(i).fn) {
+        while (i<arr.size() && node.fn >= arr.get(i).fn) {
             i++;
         }
         arr.add(i,node);
