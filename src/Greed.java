@@ -13,7 +13,6 @@ public class Greed {
         }
         MainProgram.listVocabs.remove(i);
         Tree result = new Tree();
-        // List<Tree> temp= new ArrayList<Tree>();
         List<Tree> pq = new ArrayList<>();
         Tree.addQueueTree(pq,root);
         boolean found = false;

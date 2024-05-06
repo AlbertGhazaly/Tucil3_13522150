@@ -12,8 +12,6 @@ public class UCS {
         }
         MainProgram.listVocabs.remove(i);
         Tree result = new Tree();
-        // PriorityQueue<Tree> pq = new PriorityQueue<>(Comparator.comparingInt(Tree::getFn).reversed());
-        // List<Tree> temp= new ArrayList<Tree>();
 
         List<Tree> pq = new ArrayList<>();
         Tree.addQueueTree(pq,root);
@@ -58,6 +56,5 @@ public class UCS {
             System.out.print("Visited Node: ");
             System.out.println(UCS.visited_node);
         }
-        // return temp;
     }
 }

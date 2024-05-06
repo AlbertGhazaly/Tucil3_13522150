@@ -15,10 +15,10 @@ public class Parse {
     }
 
     public static void parseWord(String path){
-        // Specify the path to your .txt file
+        // Specify the path
         String filePath = path;
 
-        // Create a map to store words by their length
+        // Create a map to store words by length
         Map<Integer, ArrayList<String>> wordMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -30,9 +30,8 @@ public class Parse {
                 // Check if the line contains only alphabets
                 if (line.matches("[a-zA-Z]+")) {
                     int length = line.length();
-                    // If the length is not in the map, create a new ArrayList for that length
+                   
                     wordMap.putIfAbsent(length, new ArrayList<>());
-                    // Add the word to the ArrayList corresponding to its length
                     wordMap.get(length).add(line);
                 }
             }
@@ -40,7 +39,7 @@ public class Parse {
             e.printStackTrace();
         }
 
-        // Print the word map
+
         for (Map.Entry<Integer, ArrayList<String>> entry : wordMap.entrySet()) {
             int length = entry.getKey();
             ArrayList<String> words = entry.getValue();
