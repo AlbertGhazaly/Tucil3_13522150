@@ -45,8 +45,8 @@ Word Ladder atau permainan tangga kata (juga dikenal sebagai Doublets, tautan ka
 * I/O file
 * GUI
 ### To-do:
-* input from .txt file feature
-* output to gif file feature
+* Input from .txt file feature
+* Output to .txt file feature
 * Create GUI implementation using appropriate java libraries
 ## Profile
 * Nama: Albert Ghazaly
